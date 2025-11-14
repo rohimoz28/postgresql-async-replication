@@ -1,0 +1,35 @@
+### GET all books
+GET http://localhost:5002/books
+
+###
+
+###
+GET http://localhost:5002/health
+
+###
+
+### POST new book
+POST http://localhost:5002/books
+Content-Type: application/json
+
+{
+  "name": "Belajar Berjalan Diatas Air"
+}
+
+###
+
+### UPDATE book
+PUT http://localhost:5001/books/3
+Content-Type: application/json
+
+{
+  "name": "Belajar Flask Sampai Mahir Part 2"
+}
+
+###
+
+### DELETE book
+DELETE http://localhost:5001/books/3
+Content-Type: application/json
+
+###

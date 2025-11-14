@@ -1,0 +1,12 @@
+# Flask Configuration
+FLASK_ENV=production
+FLASK_DEBUG=0
+SECRET_KEY=supersecretkey
+PYTHONUNBUFFERED=1
+
+# Database Configuration
+DB_USER=odoo
+DB_PASSWORD=adminodoodev
+DB_HOST=postgres
+DB_PORT=5432
+DB_NAME=TEST

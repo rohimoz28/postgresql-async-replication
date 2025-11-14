@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  app-flask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: app-flask
+    container_name: app-flask
+    restart: no
+    env_file:
+      - .env
+    environment:
+      FLASK_DEBUG: "1"
+    volumes:
+      - ./app:/app
+    ports:
+      - "5002:5000"
+    command: >
+      sh -c "sleep 10 && python app.py"
+    networks:
+      - flask_async_network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.25'
+    #       memory: 500M
+    #     reservations:
+    #       cpus: '0.1'
+    #       memory: 100M
+
+  db-master:
+    image: postgres:16
+    container_name: db-master
+    restart: no
+    environment:
+      POSTGRES_USER: flaskuser
+      POSTGRES_PASSWORD: flaskpwd
+      POSTGRES_DB: app_db
+    ports:
+      - "5441:5432"
+    volumes:
+      - db_postgres:/var/lib/postgresql/data
+      #      - ./master/init-master.sh:/docker-entrypoint-initdb.d/init-master.sh
+      #      - ./master/master-wal:/var/lib/postgresql/wal_archive
+      # - ./master/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      # - ./master/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+    # command: [ "postgres", "-c", "config_file=/etc/postgresql/postgresql.conf" ]
+    networks:
+      - flask_async_network
+
+volumes:
+  data_flask:
+    name: data_flask
+  db_postgres:
+    name: db_postgres
+
+networks:
+  flask_async_network:
+    external: true
