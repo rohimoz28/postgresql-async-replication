@@ -13,7 +13,7 @@ POST http://localhost:5002/books
 Content-Type: application/json
 
 {
-  "name": "Belajar Berlari Secepat Angin 2"
+  "name": "Belajar Berlari Secepat Angin"
 }
 
 ###
